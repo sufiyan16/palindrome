@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    {% if request.user.is_authenticated %}
+   
+    <li ><a href="{% url 'logout' %}" >Logout</a></li>
+        <li><a href="{% url 'account'  %}">Account</a></li> 
+        <li><a href="{% url 'palindrome'  %}">palidromes</a></li>
+
+    <div>
+        <p>Welcome {{request.user}}</p>
+    </div>
+    <p>Click on the link to create palidrome  <a href="{% url 'create-pal' %}">Create Game</a></p>
+
+    {% else %}
+    <p >Login to play  <a href="{% url 'login' %}" >Login/Sign Up</a></p>
+    {% endif%}
+
+    
+
+    <h1>  All the palidromes</h1>
+    {% for message in messages %}
+    <p>{{form.input}}{{message}}</p>
+    {% endfor %}
+    
+    {% for pa in pal %}
+    
+    <div>
+    <li>
+        <ul>{{pa}} Created on- {{pa.created | timesince}} </ul>
+        
+        {% if request.user.is_authenticated %}
+            {% if request.user.profile == pa.owner %}
+            <a href="{% url 'update-pal' pa.id %}">Update</a>
+            <a href="{% url 'delete' pa.id %}">Delete</a>
+            {% endif %}
+        {% endif%}
+    </li>
+    </div>
+       
+    {% endfor %}
+    {% block content %}
+
+    
+    {% endblock content%}
+    
+    
+
+
+</body>
+</html>

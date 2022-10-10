@@ -1,0 +1,46 @@
+
+{% if request.user.is_authenticated %}
+<div>
+    <div>
+        <li ><a href="{% url 'logout' %}" >Logout</a></li>
+        <li><a href="{% url 'account'  %}">Account</a></li> 
+        
+        <li><a href="{% url 'palindrome'  %}">palidromes</a></li>
+        <p>Click on the link to create palidrome  <a href="{% url 'create-pal' %}">Create Game</a></p>
+    </div>
+
+    <div>
+        <h1>Your account details </h1>
+
+            <li>Name :- {{profile.name}}</li>
+            <li>Email :- {{profile.email}}
+                <li> Username :- {{profile.username}}</li>   
+                <p><a href="{% url 'edit-account'  %}">Edit Account</a> <a href="{% url 'delete-account' profile.id %}">Delete Account</a></li></p>   
+                
+            </li> 
+    </div>
+
+    <h1> Your palidromes </h1>
+
+    {% for pa in pal %}
+    <div>
+        <li>
+            <ul>{{pa}} Created on- {{pa.created | timesince}} </ul>
+            
+            {% if request.user.is_authenticated %}
+                {% if request.user.profile == pa.owner %}
+                <a href="{% url 'update-pal' pa.id %}">Update</a>
+                <a href="{% url 'delete' pa.id %}">Delete</a>
+                {% endif %}
+            {% endif%}
+        </li>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endif %}
+
+
+
+

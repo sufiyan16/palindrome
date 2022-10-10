@@ -1,0 +1,40 @@
+
+<div>
+    <h3>Account Login</h3>
+    <p>Hello Developer, Welcome Back!
+      <li><a href="{% url 'palindrome'  %}">Back</a></li>
+    </p> 
+    
+</div>
+
+<form action="" method="POST" >
+    {% csrf_token %}
+    <!-- Input:Email -->
+    <div >
+      <label>Username: </label>
+      <input type="text" name="username"
+        placeholder="Enter your username..." />
+    </div>
+
+    <!-- Input:Password -->
+    <div >
+      <label for="formInput#password">Password: </label>
+      <input type="password" name="password"
+        placeholder="••••••••" />
+    </div>
+    <div >
+      <input class="btn btn--sub btn--lg" type="submit" value="Log In" />
+      <a href="">Forget Password?</a>
+    </div>
+  </form>
+
+  <div >
+    <p>Don’t have an Account?</p>
+    <a href="{% url 'register' %}">Sign Up</a> 
+  </div>
+
+  {% for message in messages %}
+  {{message}} <br>
+  {% endfor %}
+</div>
+</div>

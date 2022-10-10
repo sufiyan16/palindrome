@@ -1,0 +1,16 @@
+<div>
+    <div>
+        <form class="form" method="POST" action="{% url 'edit-account' %}">
+            {% csrf_token %}
+
+            {% for field in form %}
+            <div >
+                <label >{{field.label}}</label>
+                {{field}}
+            </div>
+            {% endfor %}
+
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+</div>

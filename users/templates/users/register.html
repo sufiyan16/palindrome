@@ -1,0 +1,24 @@
+{% if page == 'register' %}
+
+<div>
+    <div>
+        <h3>Account SignUp</h3>
+        <p>Create a new developer account</p>
+     
+
+      <form method="POST" action="{% url 'register' %}" class="form auth__form">
+        {% csrf_token %}
+
+        {{form.as_p}}
+
+        <div >
+          <input  type="submit" value="Sign  In" />
+        </div>
+      </form>
+      <div >
+        <p>Already have an Account?</p>
+        <a href="{% url 'login' %}">Log In</a>
+      </div>
+    </div>
+</div>
+{% endif %}

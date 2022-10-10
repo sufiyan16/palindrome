@@ -1,0 +1,7 @@
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <p>Are you sure you want to delete this {{object}} project</p>
+    <a href="{% url 'palindrome'%}">Cancel</a>
+    <input type="submit">
+</form>
