@@ -19,6 +19,6 @@ urlpatterns = [
     path('update-palindrome/<str:pk>/',views.updatePalindrome),
     path('delete-palindrome/<str:pk>/delete/',views.deletePalindrome),
 
-    path('create-user/',RegisterUserAPIView.as_view()),
-
+    #user register api
+    path('create-user/',RegisterUserAPIView.as_view()), 
 ]
