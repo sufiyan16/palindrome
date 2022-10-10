@@ -4,7 +4,7 @@ from urllib import response
 from django.http import JsonResponse, HttpResponse
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
-from yaml import serialize
+
 from .serializers import PalindromeSerializer, CreatePalindromeSerializer, RegisterSerializer, UpdateUserSerializer
 from palindrome.models import Palindrome
 from users.models import Profile
@@ -13,7 +13,7 @@ from rest_framework import status
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
 
-from pal.api import serializers
+
 
 
 @api_view(['GET'])
@@ -142,11 +142,8 @@ class RegisterUserAPIView(generics.CreateAPIView):
   permission_classes = (AllowAny,)
   serializer_class = RegisterSerializer
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def UpdateUser(request,pk):
-    profile=Profile.Objects.get(id=pk)
-    serializer=UpdateUserSerializer(instance=profile,data=request.data)
-    if serializer.is_valid():    
-        serializer.save()
-        return Response(serializer.data)
+class UpdateProfileView(generics.UpdateAPIView):
+
+    queryset = Profile.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = UpdateUserSerializer

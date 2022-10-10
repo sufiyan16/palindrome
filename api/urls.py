@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views 
-from .views import RegisterUserAPIView
+from .views import RegisterUserAPIView, UpdateProfileView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -21,4 +21,5 @@ urlpatterns = [
 
     #user register api
     path('create-user/',RegisterUserAPIView.as_view()), 
+    path('update_profile/<int:pk>/', UpdateProfileView.as_view()),
 ]
